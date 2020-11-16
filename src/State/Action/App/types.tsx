@@ -13,12 +13,14 @@ export const SUCCESS_MESSAGE = "SUCCESS_MESSAGE";
 
 export interface ILoginRequest {
     type: typeof LOGIN_REQUEST;
-    loginDetails: ILoginDetails;
+    username: string;
+    password: string;
 }
 
 export interface IRegisterRequest {
     type: typeof REGISTER_REQUEST;
-    loginDetails: ILoginDetails;
+    username: string;
+    password: string;
 }
 
 export interface ISaveList {
@@ -45,20 +47,20 @@ export interface ISearchRequest {
 }
 
 export interface ILoadingState {
-    type: typeof LOADING_STATE,
-    isLoading: boolean,
+    type: typeof LOADING_STATE;
+    isLoading: boolean;
 }
 
 export interface ISetErrorMessage {
-    type: typeof ERROR_MESSAGE,
-    errorMessage: string,
-    alertMode: "error" | undefined
+    type: typeof ERROR_MESSAGE;
+    errorMessage: string;
+    alertMode: "error" | undefined;
 }
 
 export interface ISetSuccessMessage {
-    type: typeof SUCCESS_MESSAGE,
-    successMessage: string,
-    alertMode: "success" | undefined
+    type: typeof SUCCESS_MESSAGE;
+    successMessage: string;
+    alertMode: "success" | undefined;
 }
 
 

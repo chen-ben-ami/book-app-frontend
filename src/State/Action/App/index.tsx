@@ -2,17 +2,19 @@ import { ILoginDetails } from '../../../API/interfaces';
 import * as AppActions from './types';
 
 
-export function loginRequest(loginDetails: ILoginDetails): AppActions.ILoginRequest {
+export function loginRequest(username: string, password: string): AppActions.ILoginRequest {
     return {
         type: AppActions.LOGIN_REQUEST,
-        loginDetails: loginDetails
+        username: username,
+        password: password,
     }
 }
 
-export function registerRequest(loginDetails: ILoginDetails): AppActions.IRegisterRequest {
+export function registerRequest(username: string, password: string): AppActions.IRegisterRequest {
     return {
         type: AppActions.REGISTER_REQUEST,
-        loginDetails: loginDetails
+        username: username,
+        password: password,
     }
 }
 
@@ -34,6 +36,7 @@ export function searchRequest(queryString: string): AppActions.ISearchRequest {
         queryString: queryString
     }
 }
+
 
 
 export function setErrorMessage(errorMessage: string, alertMode: "error" | undefined): AppActions.ISetErrorMessage {

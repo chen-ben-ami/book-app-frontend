@@ -15,18 +15,28 @@ import jwt from 'jwt-decode'
 
 
 const StyledInput: any = styled(TextField)`
-    backgroundColor: 'white';
     width: '50%';
+    margin: '2.5%'
 `
 
 const StyledDiv: any = styled.div`
     display:flex;
     flex-direction: column;
     justify-content:center;
+    align-items:'center';
+    align-content:'center';
     width:50%;
-    border:1px solid red;
-    text-align:center;
+    height: 100%;
 `;
+
+const StyledForm: any = styled.form`
+    display: 'flex';
+    flexDirection: 'column';
+    alignItems: 'center';
+    border: '2px solid black';
+    borderRadius: '10px';
+    padding: '15%';
+`
 
 const Login: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
@@ -36,6 +46,7 @@ const Login: React.FunctionComponent = () => {
 
     useEffect(() => {
         if (acessToken !== null) {
+            console.log(acessToken)
             const userInfo: IToken = jwt(acessToken);
             if (userInfo.premission === "admin") history.push(Routes.ADMIN)
             else if (userInfo.premission === "user") history.push(Routes.USER)
@@ -71,7 +82,7 @@ const Login: React.FunctionComponent = () => {
             validationSchema={SignupSchema}
         >
             {({ errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, values }) => (
-                <form onSubmit={handleSubmit}>
+                <StyledForm onSubmit={handleSubmit}>
                     <StyledInput
                         mode='outlined'
                         onChange={handleChange('username')}
@@ -101,19 +112,17 @@ const Login: React.FunctionComponent = () => {
                         await setFieldValue('isRegister', true)
                         handleSubmit();
                     }}> Register and Login </Button>
-                </form>
+                </StyledForm>
             )}
         </Formik>
     );
 
     const handleLogin = (username: string, password: string) => {
-        dispatch(loginRequest({ username: username, password: password }));
-        console.log("log in")
+        dispatch(loginRequest(username, password));
     }
 
     const handleRegister = (username: string, password: string) => {
-        dispatch(registerRequest({ username: username, password: password }));
-        console.log("register")
+        dispatch(registerRequest(username, password));
     }
 
     return (

@@ -10,7 +10,7 @@ const Admin: React.FunctionComponent = () => {
 
     return (
         <div style={{ width: '100%', height: '80%' }}>
-            HEY
+            HEY admin
         </div>
     );
 }

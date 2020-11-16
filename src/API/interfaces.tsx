@@ -9,6 +9,7 @@ export interface IToken {
 }
 
 export interface IBook {
+    _id: string,
     bookName: string,
     author: {
         authorName: string,
