@@ -35,9 +35,11 @@ const Login: React.FunctionComponent = () => {
     const isLoading: boolean = useSelector((state: any) => state.app.isLoading)
 
     useEffect(() => {
-        const userInfo: IToken = jwt(acessToken);
-        if (userInfo.premission === "admin") history.push(Routes.ADMIN)
-        else if (userInfo.premission === "user") history.push(Routes.USER)
+        if (acessToken !== null) {
+            const userInfo: IToken = jwt(acessToken);
+            if (userInfo.premission === "admin") history.push(Routes.ADMIN)
+            else if (userInfo.premission === "user") history.push(Routes.USER)
+        }
     }, [acessToken]);
 
     const fieldRegex = /^[A-Za-z]+$/;
