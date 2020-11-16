@@ -17,9 +17,10 @@ interface IProps {
     variant: "contained" | "outlined" | undefined
 }
 const AppIconButton: React.FunctionComponent<IProps> = ({ text, icon, clickHandler, variant }) => {
-    return <StyledButton startIcon={icon} onClick={() => clickHandler()} variant={variant}>
+    return <StyledButton type={"submit"} startIcon={icon} onClick={() => clickHandler()} variant={variant}>
         {text}
     </StyledButton>;
 }
+
 
 export default AppIconButton

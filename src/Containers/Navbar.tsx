@@ -5,8 +5,8 @@ import { Dispatch } from 'redux';
 import * as Routes from "../Lib/routes"
 import styled from 'styled-components';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AppIconButton from "../Components/AppIconButton";
 
-//dark mode color for header #333
 const StyledDiv: any = styled.div`
     display: flex;
     justify-content: center;
@@ -14,7 +14,7 @@ const StyledDiv: any = styled.div`
     align-content: center;
     flex-wrap:wrap;
     background-color: #1976d2 ;
-    color: white;
+    color: black;
     width: 100%;
     
 `;
@@ -24,29 +24,32 @@ const StyledTitle: any = styled.h1`
     margin-right: auto;
 `;
 
-// const StyledIconText: any = styled.p`
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     margin: 8px;
-// `;
+const StyledIconText: any = styled.p`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 8px;
+`;
 
-// const StyledIconButton: any = styled(ExitToAppIcon)`
-//     align - items: center;
-//     margin: 8px;
-//     margin-right: 1%;
-// `;
+const StyledIconButton: any = styled(AppIconButton)`
+    align - items: center;
+    margin: 8px;
+    margin-right: 1%;
+`;
 
 const NavBar: React.FunctionComponent = () => {
     const history = useHistory();
     const dispatch: Dispatch = useDispatch();
 
+    const handleLogoutClicked = () => {
+        history.push(Routes.LOGIN)
+    }
     return (
         <StyledDiv>
             <StyledTitle>Books shop</StyledTitle>
-            {/* <StyledIconText>
-                <StyledIconButton clickHandler={() => changeThemeModeHandler()} text={""} icon={themeButton} variant={undefined} />
-            </StyledIconText> */}
+            <StyledIconText>
+                <StyledIconButton clickHandler={() => handleLogoutClicked()} text={"Logout"} icon={<ExitToAppIcon />} variant={undefined} />
+            </StyledIconText>
         </StyledDiv>
     );
 }
