@@ -1,18 +1,23 @@
 export interface ILoginDetails {
-    username: string;
-    password: string;
+    username: string,
+    password: string,
+}
+
+export interface IToken {
+    username: string,
+    premission: string,
 }
 
 export interface IBook {
-    bookName: String,
+    bookName: string,
     author: {
-        authorName:string
+        authorName: string,
     },
     publisher: {
-        publisherName:string,
-        year:string
+        publisherName: string,
+        year: string,
     },
-    price: Number,
-    imageURL: String,
-    rating: Number,
+    price: number,
+    imageURL: string,
+    rating: number,
 }

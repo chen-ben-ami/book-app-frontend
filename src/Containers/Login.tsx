@@ -1,13 +1,18 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { loginRequest, registerRequest, setErrorMessage } from "../State/Action/App";
+import { TOKEN_SECRET } from "../Lib/token";
+import { IToken } from "../API/interfaces";
+import * as Routes from "../Lib/routes"
+import jwt from 'jwt-decode'
+
 
 const StyledInput: any = styled(TextField)`
     backgroundColor: 'white';
@@ -26,9 +31,16 @@ const StyledDiv: any = styled.div`
 const Login: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
     const history = useHistory();
-    const errorMessage = useSelector((state: any) => state.app.errorMessage);
-    const fieldRegex = /^[A-Za-z]+$/;
+    const acessToken: string = useSelector((state: any) => state.app.acessToken)
+    const isLoading: boolean = useSelector((state: any) => state.app.isLoading)
 
+    useEffect(() => {
+        const userInfo: IToken = jwt(acessToken);
+        if (userInfo.premission === "admin") history.push(Routes.ADMIN)
+        else if (userInfo.premission === "user") history.push(Routes.USER)
+    }, [acessToken]);
+
+    const fieldRegex = /^[A-Za-z]+$/;
 
     const SignupSchema = Yup.object().shape({
         username: Yup.string()
@@ -49,9 +61,9 @@ const Login: React.FunctionComponent = () => {
             // onSubmit={(values) => { handleLogin(values) }}
             onSubmit={values => {
                 if (values.isRegister) {
-                    handleRegister(values.username,values.password)
+                    handleRegister(values.username, values.password)
                 } else {
-                    handleLogin(values.username,values.password)
+                    handleLogin(values.username, values.password)
                 }
             }}
             validationSchema={SignupSchema}
@@ -92,12 +104,13 @@ const Login: React.FunctionComponent = () => {
         </Formik>
     );
 
-    const handleLogin = (username:string,password:string) => {
-        // dispatch(loginRequest(loginDetails));
+    const handleLogin = (username: string, password: string) => {
+        dispatch(loginRequest({ username: username, password: password }));
         console.log("log in")
     }
 
-    const handleRegister = (username:string,password:string) => {
+    const handleRegister = (username: string, password: string) => {
+        dispatch(registerRequest({ username: username, password: password }));
         console.log("register")
     }
 
