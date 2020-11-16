@@ -35,7 +35,7 @@ export const createBook = (book: IBook, acessToken: string) => {
 }
 
 export const deleteBook = (bookId: string, acessToken: string) => {
-    return axios.delete(ADMIN_BOOK + `?bookId=${bookId}`, {
+    return axios.delete(ADMIN_BOOK + `?bookId=${bookId}`,{
         headers: { 'Authorization': `Bearer ${acessToken}` }
     });
 }
@@ -47,13 +47,14 @@ export const updateBook = (bookId: string, updatedBook: IBook, acessToken: strin
 }
 
 export const orderBook = (bookId: string, acessToken: string) => {
-    return axios.put(ORDER_BOOK + `?bookId=${bookId}`, {
+    console.log(acessToken)
+    return axios.put(ORDER_BOOK + `?bookId=${bookId}`, null, {
         headers: { 'Authorization': `Bearer ${acessToken}` }
     });
 }
 
 export const getOrderedBook = (bookId: string, acessToken: string) => {
-    return axios.put(GET_BOOK + `?bookId=${bookId}`, {
+    return axios.put(GET_BOOK + `?bookId=${bookId}`, null, {
         headers: { 'Authorization': `Bearer ${acessToken}` }
     });
 }

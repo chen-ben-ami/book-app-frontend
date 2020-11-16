@@ -4,6 +4,7 @@ export interface ILoginDetails {
 }
 
 export interface IToken {
+    userId:string,
     username: string,
     premission: string,
 }

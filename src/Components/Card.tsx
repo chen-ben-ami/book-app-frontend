@@ -34,13 +34,18 @@ interface IProps {
   publisherName: string,
   price: number,
   year: string
-  imageUrl: string,
+  imageUrl: string | null,
   isAdmin: boolean
   clickHandler: Function,
 }
 
 const AppCard: React.FunctionComponent<IProps> = ({ bookName, authorName, publisherName, price, year, imageUrl, isAdmin, clickHandler }) => {
 
+  let image = null
+
+  if (imageUrl) {
+    image = <CardMedia className='IMG' component='img' image={imageUrl} />
+  }
   return (
     <StyledCard variant="outlined" onClick={() => clickHandler()}>
       <StyledCardContent>
@@ -53,7 +58,7 @@ const AppCard: React.FunctionComponent<IProps> = ({ bookName, authorName, publis
           </StyledCardContent>
           <StyledCardContent>Price: {price}€</StyledCardContent>
         </div>
-        <CardMedia className='IMG' component='img' image={imageUrl} />
+        {image}
         {isAdmin ? <div></div> : <CardActions>
           <Button size="small" color="primary">
             Buy book

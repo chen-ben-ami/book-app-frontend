@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { loginRequest, registerRequest, setErrorMessage } from "../State/Action/App";
-import { TOKEN_SECRET } from "../Lib/token";
 import { IToken } from "../API/interfaces";
 import * as Routes from "../Lib/routes"
 import jwt from 'jwt-decode'
@@ -31,10 +30,10 @@ const StyledDiv: any = styled.div`
 
 const StyledForm: any = styled.form`
     display: 'flex';
-    flexDirection: 'column';
-    alignItems: 'center';
+    flex-direction: 'column';
+    align-items: 'center';
     border: '2px solid black';
-    borderRadius: '10px';
+    border-radius: '10px';
     padding: '15%';
 `
 
@@ -71,7 +70,6 @@ const Login: React.FunctionComponent = () => {
     const form = () => (
         <Formik
             initialValues={{ isRegister: false, username: '', password: '' }}
-            // onSubmit={(values) => { handleLogin(values) }}
             onSubmit={values => {
                 if (values.isRegister) {
                     handleRegister(values.username, values.password)
