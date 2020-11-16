@@ -18,7 +18,7 @@ const Admin: React.FunctionComponent = () => {
     const booksList: Array<IBook> = useSelector((state: any) => state.app.booksList)
     const isLoading: boolean = useSelector((state: any) => state.app.isLoading)
 
-    const [createOrEdit, setCreateOrEdit] = React.useState<boolean>(false);
+    const [dialogState, setDialogState] = React.useState<boolean>(false);
     const [queryString, setQueryString] = React.useState<string>('');
     const [mode, setMode] = React.useState<'create' | 'edit'>('create');
     const [bookToEdit, setBookToEdit] = React.useState<IBook | null>(null);
@@ -32,16 +32,14 @@ const Admin: React.FunctionComponent = () => {
         if (booksList.length > 0) {
             return booksList.map((book: IBook, idx: any) => (
                 <AppCard key={idx} bookName={book.bookName} authorName={book.author.authorName} publisherName={book.publisher.publisherName} price={book.price}
-                    year={book.publisher.year} imageUrl={book.imageURL} isAdmin={true} clickHandler={() => { }} />
+                    year={book.publisher.year} imageUrl={book.imageURL} isAdmin={true} buyHandler={() => { }} editHandler={() => handleOnEdit(book)} />
             ))
         }
     }
     const handleCreateBook = () => {
-        setCreateOrEdit(true)
         setMode('create')
     }
     const handleEditBook = () => {
-        setCreateOrEdit(true)
         setMode('edit')
     }
 
@@ -50,11 +48,20 @@ const Admin: React.FunctionComponent = () => {
         else return null
     }
     const handleOnCreate = () => {
-
+        setBookToEdit(null);
+        setMode('create')
+        setDialogState(true);
     }
 
-    const handleOnEdit = () => {
+    const handleOnEdit = (book: IBook) => {
+        setBookToEdit(book);
+        setMode('edit')
+        setDialogState(true);
+    }
 
+    const handleDialogClose = () => {
+        setDialogState(false)
+        setBookToEdit(null);
     }
 
     return (
@@ -64,8 +71,11 @@ const Admin: React.FunctionComponent = () => {
                 value={queryString}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => [setQueryString(e.target.value), dispatch(searchRequest(e.target.value))]}
             />
-            <AlertDialog mode={mode} book={bookToEdit ? bookToEdit : null}
-                onCreate={() => handleCreateBook()} onEdit={()=>handleEditBook()}
+            <AppIconButton clickHandler={() => handleOnCreate()} text={"Add Book"} icon={<AddIcon />} variant={undefined} />
+
+            <AlertDialog mode={'create'} book={bookToEdit}
+                onCreate={() => handleCreateBook()} onEdit={() => { }}
+                handleClose={() => handleDialogClose()} open={dialogState}
             />
             {showList()}
             {showProgressBar()}

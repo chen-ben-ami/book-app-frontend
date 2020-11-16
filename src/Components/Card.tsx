@@ -5,7 +5,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
-
+import EditIcon from '@material-ui/icons/Edit';
+import AppIconButton from './AppIconButton';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 const StyledCard: any = styled(Card)`
   background-color: ${props => props.theme.cardColor};
   color: ${props => props.theme.textColor};
@@ -35,33 +37,33 @@ interface IProps {
   year: number
   imageUrl: string | null,
   isAdmin: boolean
-  clickHandler: Function,
+  buyHandler: Function,
+  editHandler: Function
 }
 
-const AppCard: React.FunctionComponent<IProps> = ({ bookName, authorName, publisherName, price, year, imageUrl, isAdmin, clickHandler }) => {
+const AppCard: React.FunctionComponent<IProps> = ({ bookName, authorName, publisherName, price, year, imageUrl, isAdmin, buyHandler, editHandler }) => {
 
   let image = null
 
   if (imageUrl) {
     image = <CardMedia className='IMG' component='img' image={imageUrl} />
   }
+
   return (
-    <StyledCard variant="outlined" onClick={() => clickHandler()}>
+    <StyledCard variant="outlined" >
       <StyledCardContent>
         <div className='BookText'>
           <StyledCardContent>Book name:{bookName} </StyledCardContent>
           <StyledCardContent>By: {authorName}</StyledCardContent>
           <StyledCardContent>
             Publisher: {publisherName}
-            Release year:{price}
+            Release year:{year}
           </StyledCardContent>
           <StyledCardContent>Price: {price}€</StyledCardContent>
         </div>
         {image}
-        {isAdmin ? <div></div> : <CardActions>
-          <Button size="small" color="primary">
-            Buy book
-        </Button>
+        {isAdmin ? <AppIconButton clickHandler={() => editHandler()} text={"Edit Book"} icon={<EditIcon />} variant={undefined} /> : <CardActions>
+          <AppIconButton clickHandler={() => buyHandler()} text={"Buy Book"} icon={<ShoppingCartIcon />} variant={undefined} />
         </CardActions>}
       </StyledCardContent>
     </StyledCard>

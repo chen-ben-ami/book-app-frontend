@@ -7,7 +7,7 @@ const StyledButton: any = styled(Button)`
     color: ${props => props.theme.textColor};
     background-color:${props => props.theme.buttonColor};
     width:auto%;
-    height:90%;
+    height:5%;
 `;
 
 interface IProps {

@@ -19,6 +19,8 @@ interface IProps {
     book: IBook | null
     onCreate: Function
     onEdit: Function
+    open: boolean
+    handleClose: Function
 }
 
 
@@ -36,16 +38,10 @@ const StyledInput: any = styled(TextField)`
 `
 
 
-const AlertDialog: React.FunctionComponent<IProps> = ({ mode, book, onCreate, onEdit }) => {
-    const [open, setOpen] = React.useState(false);
+const AlertDialog: React.FunctionComponent<IProps> = ({ mode, book, onCreate, onEdit, open, handleClose }) => {
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+
 
     const fieldRegex = /^[A-Za-z]+$/;
     const bookSchema = Yup.object().shape({
@@ -175,6 +171,7 @@ const AlertDialog: React.FunctionComponent<IProps> = ({ mode, book, onCreate, on
                     <Button variant="contained" color="primary" onClick={async () => {
                         handleSubmit();
                     }} > Save </Button>
+                    <AppIconButton clickHandler={() => handleClose()} text={"Cancel"} icon={<DeleteIcon />} variant={undefined} />
                 </form>
             )
             }
@@ -184,12 +181,9 @@ const AlertDialog: React.FunctionComponent<IProps> = ({ mode, book, onCreate, on
 
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                {mode === "create" ? "Create Book" : "Edit Book"}
-            </Button>
             <Dialog
                 open={open}
-                onClose={handleClose}
+                onClose={() => handleClose()}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
@@ -197,9 +191,6 @@ const AlertDialog: React.FunctionComponent<IProps> = ({ mode, book, onCreate, on
                     {form()}
                 </DialogContent>
                 <DialogActions>
-                    <AppIconButton clickHandler={() => handleClose()} text={"Cancel"} icon={<DeleteIcon />} variant={undefined} >
-                        Cancel
-                    </AppIconButton>
                 </DialogActions>
             </Dialog>
         </div>

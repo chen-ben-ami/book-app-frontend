@@ -30,7 +30,7 @@ const User: React.FunctionComponent = () => {
         if (booksList.length > 0) {
             return booksList.map((book: IBook, idx: any) => (
                 <AppCard key={idx} bookName={book.bookName} authorName={book.author.authorName} publisherName={book.publisher.publisherName} price={book.price}
-                    year={book.publisher.year} imageUrl={book.imageURL} isAdmin={false} clickHandler={() => orderBook(book._id)} />
+                    year={book.publisher.year} imageUrl={book.imageURL} isAdmin={false} buyHandler={() => orderBook(book._id)} editHandler={() => { }} />
             ))
         }
     }
@@ -39,7 +39,7 @@ const User: React.FunctionComponent = () => {
             console.log(orderedBook)
             return (<AppCard key={orderedBook._id} bookName={orderedBook.bookName} authorName={orderedBook.author.authorName}
                 publisherName={orderedBook.publisher.publisherName} price={orderedBook.price}
-                year={orderedBook.publisher.year} imageUrl={null} isAdmin={false} clickHandler={() => { }} />)
+                year={orderedBook.publisher.year} imageUrl={null} isAdmin={false} editHandler={() => { }} buyHandler={() => { }} />)
         } else {
             return (<div>
                 <p>No book ordered yet...</p>
