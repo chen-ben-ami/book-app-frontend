@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
-import { ILoginDetails } from "../API/interfaces";
 import Button from '@material-ui/core/Button';
 
 import { Formik } from 'formik';
