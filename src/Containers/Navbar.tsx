@@ -13,8 +13,8 @@ const StyledDiv: any = styled.div`
     align-items: center;
     align-content: center;
     flex-wrap:wrap;
-    background-color: ${props => props.theme.headerColor};
-    color: ${props => props.theme.color};
+    background-color: #1976d2 ;
+    color: white;
     width: 100%;
     
 `;
@@ -24,18 +24,18 @@ const StyledTitle: any = styled.h1`
     margin-right: auto;
 `;
 
-const StyledIconText: any = styled.p`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 8px;
-`;
+// const StyledIconText: any = styled.p`
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     margin: 8px;
+// `;
 
-const StyledIconButton: any = styled(ExitToAppIcon)`
-    align - items: center;
-    margin: 8px;
-    margin-right: 1%;
-`;
+// const StyledIconButton: any = styled(ExitToAppIcon)`
+//     align - items: center;
+//     margin: 8px;
+//     margin-right: 1%;
+// `;
 
 const NavBar: React.FunctionComponent = () => {
     const history = useHistory();

@@ -5,23 +5,9 @@ import AppRoutes from "./AppRoutes"
 import { ThemeProvider } from "styled-components";
 import { StylesProvider } from '@material-ui/core/styles';
 
-interface IGlobalTheme {
-  backgroundColor: string;
-  textColor: string;
 
-}
-
-interface IMainTheme {
-  cardColor: string;
-  textColor: string;
-  headerColor: string;
-  buttonColor: string;
-}
-
-const GlobalStyles: any = createGlobalStyle<IGlobalTheme>`
+const GlobalStyles: any = createGlobalStyle`
   html{    
-    background: ${(props: IGlobalTheme) => props.backgroundColor};
-    color: ${(props: IGlobalTheme) => props.textColor};
     font-family: Tahoma, Helvetica, Arial, Roboto, sans-serif;
     font-weight: bold;
     height: 100%;
@@ -55,11 +41,9 @@ function App() {
   // const alertMode: "error" | "success" | "info" | "warning" | undefined = useSelector((state: any) => state.app.alertMode);
   return (
     <DivStyle>
-      <StylesProvider injectFirst>
         <GlobalStyles />
         <AppRoutes />
         {/* <Snackbar text={alertMessage} level={alertMode} /> */}
-      </StylesProvider>
     </DivStyle>
   );
 }
