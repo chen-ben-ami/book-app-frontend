@@ -11,6 +11,7 @@ import { loginRequest, registerRequest, setErrorMessage } from "../State/Action/
 import { IToken } from "../API/interfaces";
 import * as Routes from "../Lib/routes"
 import jwt from 'jwt-decode'
+import AppBackdrop from "../Components/Backdrop";
 
 
 const StyledInput: any = styled(TextField)`
@@ -122,11 +123,18 @@ const Login: React.FunctionComponent = () => {
     const handleRegister = (username: string, password: string) => {
         dispatch(registerRequest(username, password));
     }
+    
+    const showProgressBar = () => {
+        if (isLoading) return (<AppBackdrop loading={isLoading} />)
+        else return null
+    }
 
     return (
         <StyledDiv >
             {form()}
+            {showProgressBar()}
         </StyledDiv>
+
     );
 }
 

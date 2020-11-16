@@ -1,5 +1,5 @@
 import axios from './index';
-import { IBook, ILoginDetails } from './interfaces';
+import { IBook } from './interfaces';
 
 const GET_BOOKS = '/';
 const LOGIN = '/login';
@@ -35,7 +35,7 @@ export const createBook = (book: IBook, acessToken: string) => {
 }
 
 export const deleteBook = (bookId: string, acessToken: string) => {
-    return axios.delete(ADMIN_BOOK + `?bookId=${bookId}`,{
+    return axios.delete(ADMIN_BOOK + `?bookId=${bookId}`, {
         headers: { 'Authorization': `Bearer ${acessToken}` }
     });
 }

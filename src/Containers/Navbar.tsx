@@ -1,7 +1,5 @@
 import React from "react"
-import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Dispatch } from 'redux';
 import * as Routes from "../Lib/routes"
 import styled from 'styled-components';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -39,7 +37,6 @@ const StyledIconButton: any = styled(AppIconButton)`
 
 const NavBar: React.FunctionComponent = () => {
     const history = useHistory();
-    const dispatch: Dispatch = useDispatch();
 
     const handleLogoutClicked = () => {
         history.push(Routes.LOGIN)

@@ -1,21 +1,19 @@
 import React, { useEffect } from "react"
 import { Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { getBooksRequest, searchRequest } from "../State/Action/App";
 import { IBook } from "../API/interfaces";
 import AppCard from "../Components/Card";
 import TextField from '@material-ui/core/TextField';
 import { orderBookRequest } from "../State/Action/User";
+import AppBackdrop from "../Components/Backdrop";
 
 
 const User: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
-    const history = useHistory();
-
     const acessToken: string = useSelector((state: any) => state.app.acessToken)
     const booksList: Array<IBook> = useSelector((state: any) => state.app.booksList)
-
+    const isLoading: boolean = useSelector((state: any) => state.app.isLoading)
     const orderedBook: IBook = useSelector((state: any) => state.user.orderedBook)
 
     const [queryString, setQueryString] = React.useState<string>('');
@@ -48,6 +46,12 @@ const User: React.FunctionComponent = () => {
             </div>)
         }
     }
+
+    const showProgressBar = () => {
+        if (isLoading) return (<AppBackdrop loading={isLoading} />)
+        else return null
+    }
+
     return (
         <div style={{ width: '100%', height: '80%' }}>
 
@@ -58,6 +62,7 @@ const User: React.FunctionComponent = () => {
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => [setQueryString(e.target.value), dispatch(searchRequest(e.target.value))]}
             />
             {showList()}
+            {showProgressBar()}
         </div>
     );
 }

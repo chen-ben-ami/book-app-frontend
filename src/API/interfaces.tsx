@@ -17,7 +17,7 @@ export interface IBook {
     },
     publisher: {
         publisherName: string,
-        year: string,
+        year: number,
     },
     price: number,
     imageURL: string,
