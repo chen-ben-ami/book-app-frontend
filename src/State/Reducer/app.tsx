@@ -20,7 +20,7 @@ const initialState: IAppState = {
     booksList: [],
     isLoading: false,
     alertMessage: '',
-    alertMode: undefined
+    alertMode: undefined,
 
 
 }
@@ -46,14 +46,14 @@ export default function appReducer(state: IAppState = initialState, action: AppA
                 break;
             case ERROR_MESSAGE:
                 draft.alertMessage = action.errorMessage;
-                draft.alertMode = action.alertMode
+                draft.alertMode = action.alertMode;
                 break;
             case SUCCESS_MESSAGE:
                 draft.alertMessage = action.successMessage;
-                draft.alertMode = action.alertMode
+                draft.alertMode = action.alertMode;
                 break;
             case LOADING_STATE:
-                draft.isLoading = action.isLoading
+                draft.isLoading = action.isLoading;
                 break;
             default:
                 return state;

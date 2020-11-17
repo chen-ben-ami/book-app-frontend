@@ -1,7 +1,6 @@
 import React, { useEffect } from "react"
 import { Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import AppCard from "../Components/Card";
 import { IBook, IEditableBook } from "../API/interfaces";
 import TextField from '@material-ui/core/TextField';
@@ -13,9 +12,9 @@ import AlertDialog from "../Components/Dialog";
 
 const Admin: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
-    const acessToken: string = useSelector((state: any) => state.app.acessToken)
-    const booksList: Array<IBook> = useSelector((state: any) => state.app.booksList)
-    const isLoading: boolean = useSelector((state: any) => state.app.isLoading)
+    const acessToken: string = useSelector((state: any) => state.app.acessToken);
+    const booksList: Array<IBook> = useSelector((state: any) => state.app.booksList);
+    const isLoading: boolean = useSelector((state: any) => state.app.isLoading);
 
     const [dialogState, setDialogState] = React.useState<boolean>(false);
     const [queryString, setQueryString] = React.useState<string>('');
@@ -23,7 +22,7 @@ const Admin: React.FunctionComponent = () => {
     const [bookToEdit, setBookToEdit] = React.useState<IBook | null>(null);
     useEffect(() => {
         if (acessToken !== null) {
-            dispatch(getBooksRequest())
+            dispatch(getBooksRequest());
         }
     }, [acessToken]);
 
@@ -38,23 +37,23 @@ const Admin: React.FunctionComponent = () => {
         }
     }
     const showProgressBar = () => {
-        if (isLoading) return (<AppBackdrop loading={isLoading} />)
-        else return null
+        if (isLoading) return (<AppBackdrop loading={isLoading} />);
+        else return null;
     }
     const handleOnCreate = () => {
         setBookToEdit(null);
-        setMode('create')
+        setMode('create');
         setDialogState(true);
     }
 
     const handleOnEdit = (book: IBook) => {
         setBookToEdit(book);
-        setMode('edit')
+        setMode('edit');
         setDialogState(true);
     }
 
     const handleDialogClose = () => {
-        setDialogState(false)
+        setDialogState(false);
         setBookToEdit(null);
     }
 

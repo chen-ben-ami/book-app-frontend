@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect } from "react";
 import { Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { getBooksRequest, searchRequest } from "../State/Action/App";
@@ -11,15 +11,15 @@ import AppBackdrop from "../Components/Backdrop";
 
 const User: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
-    const acessToken: string = useSelector((state: any) => state.app.acessToken)
-    const booksList: Array<IBook> = useSelector((state: any) => state.app.booksList)
-    const isLoading: boolean = useSelector((state: any) => state.app.isLoading)
-    const orderedBook: IBook = useSelector((state: any) => state.user.orderedBook)
+    const acessToken: string = useSelector((state: any) => state.app.acessToken);
+    const booksList: Array<IBook> = useSelector((state: any) => state.app.booksList);
+    const isLoading: boolean = useSelector((state: any) => state.app.isLoading);
+    const orderedBook: IBook = useSelector((state: any) => state.user.orderedBook);
 
     const [queryString, setQueryString] = React.useState<string>('');
     useEffect(() => {
         if (acessToken !== null) {
-            dispatch(getBooksRequest())
+            dispatch(getBooksRequest());
         }
     }, [acessToken]);
 
@@ -48,8 +48,8 @@ const User: React.FunctionComponent = () => {
     }
 
     const showProgressBar = () => {
-        if (isLoading) return (<AppBackdrop loading={isLoading} />)
-        else return null
+        if (isLoading) return (<AppBackdrop loading={isLoading} />);
+        else return null;
     }
 
     return (

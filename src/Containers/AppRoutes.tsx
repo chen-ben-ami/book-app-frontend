@@ -1,9 +1,9 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
-import User from "./User"
-import Admin from "./Admin"
-import * as Routes from "../Lib/routes"
-import NavBar from "./Navbar"
+import User from "./User";
+import Admin from "./Admin";
+import * as Routes from "../Lib/routes";
+import NavBar from "./Navbar";
 import Login from './Login';
 
 

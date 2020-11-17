@@ -1,10 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import { useSelector } from 'react-redux';
-import AppRoutes from "./AppRoutes"
-import { ThemeProvider } from "styled-components";
-import { StylesProvider } from '@material-ui/core/styles';
-
+import AppRoutes from "./AppRoutes";
 
 const GlobalStyles: any = createGlobalStyle`
   html{    
@@ -37,13 +33,10 @@ const DivStyle: any = styled.div`
 
 
 function App() {
-  // const alertMessage: string = useSelector((state: any) => state.app.alertMessage);
-  // const alertMode: "error" | "success" | "info" | "warning" | undefined = useSelector((state: any) => state.app.alertMode);
   return (
     <DivStyle>
-        <GlobalStyles />
-        <AppRoutes />
-        {/* <Snackbar text={alertMessage} level={alertMode} /> */}
+      <GlobalStyles />
+      <AppRoutes />
     </DivStyle>
   );
 }

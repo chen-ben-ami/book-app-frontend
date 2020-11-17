@@ -1,7 +1,7 @@
-import { IBook } from "../../../API/interfaces"
+import { IBook } from "../../../API/interfaces";
 
-export const ORDER_BOOK = "ORDER_BOOK"
-export const SAVE_BOOK = "SAVE_BOOK"
+export const ORDER_BOOK = "ORDER_BOOK";
+export const SAVE_BOOK = "SAVE_BOOK";
 
 export interface IOrderBookRequest {
     type: typeof ORDER_BOOK;
@@ -12,11 +12,11 @@ export interface IOrderBookRequest {
 
 export interface IShowOrder {
     type: typeof SAVE_BOOK;
-    orderedBook: IBook
+    orderedBook: IBook;
 }
 
 
 
 
-export type UserActionTypes = IOrderBookRequest | IShowOrder
+export type UserActionTypes = IOrderBookRequest | IShowOrder;
 

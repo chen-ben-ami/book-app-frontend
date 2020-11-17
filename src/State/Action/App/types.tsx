@@ -76,7 +76,7 @@ export interface ILoadingState {
 export interface IDeleteRequest {
     type: typeof DELETE_REQUEST;
     bookId: string;
-    acessToken:string
+    acessToken: string;
 }
 
 export interface ISetErrorMessage {
@@ -94,5 +94,5 @@ export interface ISetSuccessMessage {
 
 export type AppActionTypes = ILoginRequest | IRegisterRequest | ISaveList | ISaveAcessToken | ILogoutRequest | IBooksRequest | ISearchRequest |
     ICreateRequest | IEditRequest | ILoadingState | ISaveBook | IDeleteRequest |
-    ISetErrorMessage | ISetSuccessMessage
+    ISetErrorMessage | ISetSuccessMessage;
 

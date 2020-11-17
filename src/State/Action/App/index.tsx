@@ -20,7 +20,7 @@ export function registerRequest(username: string, password: string): AppActions.
 
 export function logoutRequest(): AppActions.ILogoutRequest {
     return {
-        type: AppActions.LOGOUT_REQUEST
+        type: AppActions.LOGOUT_REQUEST,
     }
 }
 
@@ -58,7 +58,7 @@ export function editRequest(bookId: string, book: IBook, acessToken: string): Ap
         type: AppActions.EDIT_REQUEST,
         bookId: bookId,
         book: book,
-        acessToken: acessToken
+        acessToken: acessToken,
     }
 }
 

@@ -1,10 +1,12 @@
-import React from "react"
+import React from "react";
 import { useHistory } from 'react-router-dom';
 import * as Routes from "../Lib/routes"
 import styled from 'styled-components';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AppIconButton from "../Components/AppIconButton";
-
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from 'redux';
+import { logoutRequest } from "../State/Action/App";
 const StyledDiv: any = styled.div`
     display: flex;
     justify-content: center;
@@ -37,15 +39,19 @@ const StyledIconButton: any = styled(AppIconButton)`
 
 const NavBar: React.FunctionComponent = () => {
     const history = useHistory();
-
+    const dispatch: Dispatch = useDispatch();
+    const acessToken: string = useSelector((state: any) => state.app.acessToken)
     const handleLogoutClicked = () => {
-        history.push(Routes.LOGIN)
+        dispatch(logoutRequest());
+        history.push(Routes.LOGIN);
     }
     return (
         <StyledDiv>
             <StyledTitle>Books shop</StyledTitle>
             <StyledIconText>
-                <StyledIconButton clickHandler={() => handleLogoutClicked()} text={"Logout"} icon={<ExitToAppIcon />} variant={undefined} />
+                {acessToken ?
+                    <StyledIconButton clickHandler={() => handleLogoutClicked()} text={"Logout"} icon={<ExitToAppIcon />} variant={undefined} />
+                    : <React.Fragment />}
             </StyledIconText>
         </StyledDiv>
     );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect } from "react";
 import { Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -7,17 +7,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { loginRequest, registerRequest, setErrorMessage } from "../State/Action/App";
+import { loginRequest, registerRequest } from "../State/Action/App";
 import { IToken } from "../API/interfaces";
-import * as Routes from "../Lib/routes"
-import jwt from 'jwt-decode'
+import * as Routes from "../Lib/routes";
+import jwt from 'jwt-decode';
 import AppBackdrop from "../Components/Backdrop";
-
-
-const StyledInput: any = styled(TextField)`
-    width: '50%';
-    margin: '3%';
-`
 
 const StyledDiv: any = styled.div`
     display:flex;
@@ -33,15 +27,15 @@ const StyledDiv: any = styled.div`
 const Login: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
     const history = useHistory();
-    const acessToken: string = useSelector((state: any) => state.app.acessToken)
-    const isLoading: boolean = useSelector((state: any) => state.app.isLoading)
+    const acessToken: string = useSelector((state: any) => state.app.acessToken);
+    const isLoading: boolean = useSelector((state: any) => state.app.isLoading);
 
     useEffect(() => {
         if (acessToken !== null) {
-            console.log(acessToken)
+            console.log(acessToken);
             const userInfo: IToken = jwt(acessToken);
-            if (userInfo.premission === "admin") history.push(Routes.ADMIN)
-            else if (userInfo.premission === "user") history.push(Routes.USER)
+            if (userInfo.premission === "admin") history.push(Routes.ADMIN);
+            else if (userInfo.premission === "user") history.push(Routes.USER);
         }
     }, [acessToken]);
 
