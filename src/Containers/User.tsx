@@ -34,7 +34,7 @@ const User: React.FunctionComponent = () => {
         if (booksList.length > 0) {
             return booksList.map((book: IBook, idx: any) => (
                 <AppCard key={idx} bookName={book.bookName} authorName={book.author.authorName} publisherName={book.publisher.publisherName} price={book.price}
-                    year={book.publisher.year} imageUrl={book.imageURL} rating={book.rating} isAdmin={false} buyHandler={() => orderBook(book._id)} editHandler={() => { }} deleteHandler={() => { }} />
+                    year={book.publisher.year} imageUrl={book.imageURL} rating={book.rating} isAdmin={false} buyHandler={() => orderBook(book._id)} editHandler={() => { }} deleteHandler={() => { }} hideButtons={false} />
             ))
         }
     }
@@ -45,7 +45,7 @@ const User: React.FunctionComponent = () => {
                     <StyledH1>Ordered book:</StyledH1>
                     <AppCard key={orderedBook._id} bookName={orderedBook.bookName} authorName={orderedBook.author.authorName}
                         publisherName={orderedBook.publisher.publisherName} price={orderedBook.price}
-                        year={orderedBook.publisher.year} imageUrl={null} rating={orderedBook.rating} isAdmin={false} editHandler={() => { }} buyHandler={() => { }} deleteHandler={() => { }} />
+                        year={orderedBook.publisher.year} imageUrl={null} rating={orderedBook.rating} isAdmin={false} editHandler={() => { }} buyHandler={() => { }} deleteHandler={() => { }} hideButtons={true} />
                 </React.Fragment>
             )
         } else {

@@ -40,10 +40,11 @@ interface IProps {
   isAdmin: boolean
   buyHandler: Function,
   editHandler: Function,
-  deleteHandler: Function
+  deleteHandler: Function,
+  hideButtons: boolean
 }
 
-const AppCard: React.FunctionComponent<IProps> = ({ bookName, authorName, publisherName, price, year, rating, imageUrl, isAdmin, buyHandler, editHandler, deleteHandler }) => {
+const AppCard: React.FunctionComponent<IProps> = ({ bookName, authorName, publisherName, price, year, rating, imageUrl, isAdmin, buyHandler, editHandler, deleteHandler, hideButtons }) => {
 
   let image = null
   if (imageUrl) {
@@ -64,7 +65,7 @@ const AppCard: React.FunctionComponent<IProps> = ({ bookName, authorName, publis
           <StyledCardContent>Price: {price}€</StyledCardContent>
         </div>
         {image}
-        {isAdmin ? <React.Fragment>
+        {hideButtons ? <React.Fragment /> : isAdmin ? <React.Fragment>
           <p> <AppIconButton clickHandler={() => editHandler()} text={"Edit Book"} icon={<EditIcon />} variant={undefined} /> </p>
           <p> <AppIconButton clickHandler={() => deleteHandler()} text={"Delete Book"} icon={<DeleteIcon />} variant={undefined} /> </p>
         </React.Fragment>

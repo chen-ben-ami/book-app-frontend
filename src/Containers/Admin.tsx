@@ -32,7 +32,7 @@ const Admin: React.FunctionComponent = () => {
             return booksList.map((book: IBook, idx: any) => (
                 <AppCard key={idx} bookName={book.bookName} authorName={book.author.authorName} publisherName={book.publisher.publisherName} price={book.price}
                     year={book.publisher.year} imageUrl={book.imageURL} rating={book.rating} isAdmin={true} buyHandler={() => { }} editHandler={() => handleOnEdit(book)}
-                    deleteHandler={() => onDeleteHandler(book._id)} />
+                    deleteHandler={() => onDeleteHandler(book._id)}  hideButtons={false}/>
             ))
         }
     }
