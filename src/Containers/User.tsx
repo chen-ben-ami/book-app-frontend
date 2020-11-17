@@ -7,7 +7,11 @@ import AppCard from "../Components/Card";
 import TextField from '@material-ui/core/TextField';
 import { orderBookRequest } from "../State/Action/User";
 import AppBackdrop from "../Components/Backdrop";
+import styled from 'styled-components';
 
+const StyledH1: any = styled.h1`
+    text-align:center;
+`;
 
 const User: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
@@ -36,10 +40,14 @@ const User: React.FunctionComponent = () => {
     }
     const showOrdered = () => {
         if (orderedBook !== null && orderedBook !== undefined) {
-            console.log(orderedBook)
-            return (<AppCard key={orderedBook._id} bookName={orderedBook.bookName} authorName={orderedBook.author.authorName}
-                publisherName={orderedBook.publisher.publisherName} price={orderedBook.price}
-                year={orderedBook.publisher.year} imageUrl={null} rating={orderedBook.rating} isAdmin={false} editHandler={() => { }} buyHandler={() => { }} deleteHandler={() => { }} />)
+            return (
+                <React.Fragment>
+                    <StyledH1>Ordered book:</StyledH1>
+                    <AppCard key={orderedBook._id} bookName={orderedBook.bookName} authorName={orderedBook.author.authorName}
+                        publisherName={orderedBook.publisher.publisherName} price={orderedBook.price}
+                        year={orderedBook.publisher.year} imageUrl={null} rating={orderedBook.rating} isAdmin={false} editHandler={() => { }} buyHandler={() => { }} deleteHandler={() => { }} />
+                </React.Fragment>
+            )
         } else {
             return (<div>
                 <p>No book ordered yet...</p>

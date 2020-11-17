@@ -47,7 +47,6 @@ export const updateBook = (bookId: string, updatedBook: IBook, acessToken: strin
 }
 
 export const orderBook = (bookId: string, acessToken: string) => {
-    console.log(acessToken)
     return axios.put(ORDER_BOOK + `?bookId=${bookId}`, null, {
         headers: { 'Authorization': `Bearer ${acessToken}` }
     });

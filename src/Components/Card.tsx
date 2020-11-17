@@ -69,7 +69,7 @@ const AppCard: React.FunctionComponent<IProps> = ({ bookName, authorName, publis
           <p> <AppIconButton clickHandler={() => deleteHandler()} text={"Delete Book"} icon={<DeleteIcon />} variant={undefined} /> </p>
         </React.Fragment>
           : <CardActions>
-            <AppIconButton clickHandler={() => buyHandler()} text={"Buy Book"} icon={<ShoppingCartIcon />} variant={undefined} />
+            <p><AppIconButton clickHandler={() => buyHandler()} text={"Buy Book"} icon={<ShoppingCartIcon />} variant={undefined} /></p>
           </CardActions>}
       </StyledCardContent>
     </StyledCard>

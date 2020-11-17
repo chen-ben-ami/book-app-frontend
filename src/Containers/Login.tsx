@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { loginRequest, registerRequest } from "../State/Action/App";
+import { loginRequest, registerRequest, setSuccessMessage } from "../State/Action/App";
 import { IToken } from "../API/interfaces";
 import * as Routes from "../Lib/routes";
 import jwt from 'jwt-decode';
@@ -32,12 +32,14 @@ const Login: React.FunctionComponent = () => {
 
     useEffect(() => {
         if (acessToken !== null) {
-            console.log(acessToken);
             const userInfo: IToken = jwt(acessToken);
             if (userInfo.premission === "admin") history.push(Routes.ADMIN);
             else if (userInfo.premission === "user") history.push(Routes.USER);
         }
     }, [acessToken]);
+    useEffect(() => {
+        dispatch(setSuccessMessage("Welcome to the book store! admin user -username:admin password:admin", "success"))
+    }, [dispatch]);
 
     const fieldRegex = /^[A-Za-z]+$/;
 
@@ -72,6 +74,7 @@ const Login: React.FunctionComponent = () => {
                     , alignItems: 'center', border: '2px solid black', borderRadius: '10px', padding: '15%'
                 }}>
                     <TextField
+                        autoComplete='username'
                         style={{ margin: '2.5%', width: '50%' }}
                         variant='outlined'
                         onChange={handleChange('username')}
@@ -83,6 +86,7 @@ const Login: React.FunctionComponent = () => {
                         <p >{errors.username}</p>
                     ) : null}
                     <TextField
+                        autoComplete="current-password"
                         style={{ margin: '2.5%', width: '50%' }}
                         variant='outlined'
                         type="password"

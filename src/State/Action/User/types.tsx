@@ -1,7 +1,7 @@
 import { IBook } from "../../../API/interfaces";
 
 export const ORDER_BOOK = "ORDER_BOOK";
-export const SAVE_BOOK = "SAVE_BOOK";
+export const SAVE_ORDERED_BOOK = "SAVE_ORDERED_BOOK";
 
 export interface IOrderBookRequest {
     type: typeof ORDER_BOOK;
@@ -11,7 +11,7 @@ export interface IOrderBookRequest {
 
 
 export interface IShowOrder {
-    type: typeof SAVE_BOOK;
+    type: typeof SAVE_ORDERED_BOOK;
     orderedBook: IBook;
 }
 

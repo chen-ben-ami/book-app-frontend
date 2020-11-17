@@ -13,7 +13,7 @@ function* LoginFlow(username: string, password: string) {
         yield put({ type: SAVE_ACESS_TOKEN, acessToken: res.data.acessToken });
     }
     catch (error) {
-        yield put({ type: ERROR_MESSAGE, errorMessage: error.message });
+        yield put({ type: ERROR_MESSAGE, errorMessage: "No user found... wrong username or password", alertMode: "error" });
     } finally {
         yield put({ type: LOADING_STATE, isLoading: false });
     }
@@ -29,7 +29,6 @@ export function* watchLogin() {
 
 function* registerFlow(username: string, password: string) {
     try {
-        console.log(username)
         yield put({ type: ERROR_MESSAGE, errorMessage: '' });
         yield put({ type: LOADING_STATE, isLoading: true });
         const res = yield call(ApiMethods.register, username, password);
