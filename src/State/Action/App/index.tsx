@@ -1,4 +1,4 @@
-import { ILoginDetails } from '../../../API/interfaces';
+import { IBook } from '../../../API/interfaces';
 import * as AppActions from './types';
 
 
@@ -33,11 +33,34 @@ export function getBooksRequest(): AppActions.IBooksRequest {
 export function searchRequest(queryString: string): AppActions.ISearchRequest {
     return {
         type: AppActions.SEARCH_REQUEST,
-        queryString: queryString
+        queryString: queryString,
     }
 }
 
+export function createRequest(book: IBook, acessToken: string): AppActions.ICreateRequest {
+    return {
+        type: AppActions.CREATE_REQUEST,
+        book: book,
+        acessToken: acessToken,
+    }
+}
 
+export function deleteRequest(bookId: string, acessToken: string): AppActions.IDeleteRequest {
+    return {
+        type: AppActions.DELETE_REQUEST,
+        bookId: bookId,
+        acessToken: acessToken,
+    }
+}
+
+export function editRequest(bookId: string, book: IBook, acessToken: string): AppActions.IEditRequest {
+    return {
+        type: AppActions.EDIT_REQUEST,
+        bookId: bookId,
+        book: book,
+        acessToken: acessToken
+    }
+}
 
 export function setErrorMessage(errorMessage: string, alertMode: "error" | undefined): AppActions.ISetErrorMessage {
     return {

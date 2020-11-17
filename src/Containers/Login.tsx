@@ -16,7 +16,7 @@ import AppBackdrop from "../Components/Backdrop";
 
 const StyledInput: any = styled(TextField)`
     width: '50%';
-    margin: '2.5%'
+    margin: '3%';
 `
 
 const StyledDiv: any = styled.div`
@@ -29,14 +29,6 @@ const StyledDiv: any = styled.div`
     height: 100%;
 `;
 
-const StyledForm: any = styled.form`
-    display: 'flex';
-    flex-direction: 'column';
-    align-items: 'center';
-    border: '2px solid black';
-    border-radius: '10px';
-    padding: '15%';
-`
 
 const Login: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
@@ -81,9 +73,13 @@ const Login: React.FunctionComponent = () => {
             validationSchema={SignupSchema}
         >
             {({ errors, touched, handleChange, handleBlur, handleSubmit, setFieldValue, values }) => (
-                <StyledForm onSubmit={handleSubmit}>
-                    <StyledInput
-                        mode='outlined'
+                <form onSubmit={handleSubmit} style={{
+                    display: 'flex', flexDirection: 'column'
+                    , alignItems: 'center', border: '2px solid black', borderRadius: '10px', padding: '15%'
+                }}>
+                    <TextField
+                        style={{ margin: '2.5%', width: '50%' }}
+                        variant='outlined'
                         onChange={handleChange('username')}
                         onBlur={handleBlur('username')}
                         value={values.username}
@@ -92,8 +88,9 @@ const Login: React.FunctionComponent = () => {
                     {errors.username && touched.username ? (
                         <p >{errors.username}</p>
                     ) : null}
-                    <StyledInput
-                        mode='outlined'
+                    <TextField
+                        style={{ margin: '2.5%', width: '50%' }}
+                        variant='outlined'
                         type="password"
                         onChange={handleChange('password')}
                         onBlur={handleBlur('password')}
@@ -103,17 +100,18 @@ const Login: React.FunctionComponent = () => {
                     {errors.password && touched.password ? (
                         <p >{errors.password}</p>
                     ) : null}
-                    <Button variant="contained" color="primary" onClick={async () => {
+                    <Button variant="contained" color="primary" style={{ margin: '2.5%', width: '50%' }} onClick={async () => {
                         await setFieldValue('isRegister', false)
                         handleSubmit();
                     }} > Login </Button>
-                    <Button variant="contained" color="primary" onClick={async () => {
+                    <Button variant="contained" color="primary" style={{ margin: '2.5%', width: '50%' }} onClick={async () => {
                         await setFieldValue('isRegister', true)
                         handleSubmit();
                     }}> Register and Login </Button>
-                </StyledForm>
-            )}
-        </Formik>
+                </form>
+            )
+            }
+        </Formik >
     );
 
     const handleLogin = (username: string, password: string) => {
@@ -123,7 +121,7 @@ const Login: React.FunctionComponent = () => {
     const handleRegister = (username: string, password: string) => {
         dispatch(registerRequest(username, password));
     }
-    
+
     const showProgressBar = () => {
         if (isLoading) return (<AppBackdrop loading={isLoading} />)
         else return null

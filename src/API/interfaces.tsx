@@ -4,7 +4,7 @@ export interface ILoginDetails {
 }
 
 export interface IToken {
-    userId:string,
+    userId: string,
     username: string,
     premission: string,
 }
@@ -19,6 +19,17 @@ export interface IBook {
         publisherName: string,
         year: number,
     },
+    price: number,
+    imageURL: string,
+    rating: number,
+}
+
+export interface IEditableBook {
+    _id: string,
+    bookName: string,
+    authorName: string,
+    publisherName: string,
+    year: number,
     price: number,
     imageURL: string,
     rating: number,

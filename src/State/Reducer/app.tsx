@@ -1,6 +1,6 @@
 import produce from 'immer';
 import { IBook } from '../../API/interfaces';
-import { AppActionTypes, BOOKS_REQUEST, ERROR_MESSAGE, LOADING_STATE, LOGOUT_REQUEST, SAVE_ACESS_TOKEN, SAVE_LIST, SEARCH_REQUEST, SUCCESS_MESSAGE } from '../Action/App/types';
+import { AppActionTypes, ERROR_MESSAGE, LOADING_STATE, LOGOUT_REQUEST, SAVE_ACESS_TOKEN, SAVE_BOOK, SAVE_LIST, SUCCESS_MESSAGE } from '../Action/App/types';
 
 export interface IAppState {
     readonly isLoggedIn: boolean,
@@ -32,7 +32,6 @@ export default function appReducer(state: IAppState = initialState, action: AppA
             case SAVE_LIST:
                 draft.booksList = action.booksList;
                 break;
-
             case SAVE_ACESS_TOKEN:
                 draft.acessToken = action.acessToken;
                 break;
@@ -42,12 +41,8 @@ export default function appReducer(state: IAppState = initialState, action: AppA
                 draft.isAdmin = false;
                 draft.isLoggedIn = false;
                 break;
-            case BOOKS_REQUEST:
-
-                break;
-
-            case SEARCH_REQUEST:
-
+            case SAVE_BOOK:
+                draft.booksList.push(action.book);
                 break;
             case ERROR_MESSAGE:
                 draft.alertMessage = action.errorMessage;

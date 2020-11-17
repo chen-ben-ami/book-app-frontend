@@ -3,9 +3,9 @@ import { Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import AppCard from "../Components/Card";
-import { IBook } from "../API/interfaces";
+import { IBook, IEditableBook } from "../API/interfaces";
 import TextField from '@material-ui/core/TextField';
-import { getBooksRequest, searchRequest } from "../State/Action/App";
+import { createRequest, deleteRequest, editRequest, getBooksRequest, searchRequest } from "../State/Action/App";
 import AppIconButton from "../Components/AppIconButton";
 import AddIcon from '@material-ui/icons/Add';
 import AppBackdrop from "../Components/Backdrop";
@@ -13,7 +13,6 @@ import AlertDialog from "../Components/Dialog";
 
 const Admin: React.FunctionComponent = () => {
     const dispatch: Dispatch = useDispatch();
-    const history = useHistory();
     const acessToken: string = useSelector((state: any) => state.app.acessToken)
     const booksList: Array<IBook> = useSelector((state: any) => state.app.booksList)
     const isLoading: boolean = useSelector((state: any) => state.app.isLoading)
@@ -28,21 +27,16 @@ const Admin: React.FunctionComponent = () => {
         }
     }, [acessToken]);
 
+
     const showList = () => {
         if (booksList.length > 0) {
             return booksList.map((book: IBook, idx: any) => (
                 <AppCard key={idx} bookName={book.bookName} authorName={book.author.authorName} publisherName={book.publisher.publisherName} price={book.price}
-                    year={book.publisher.year} imageUrl={book.imageURL} isAdmin={true} buyHandler={() => { }} editHandler={() => handleOnEdit(book)} />
+                    year={book.publisher.year} imageUrl={book.imageURL} rating={book.rating} isAdmin={true} buyHandler={() => { }} editHandler={() => handleOnEdit(book)}
+                    deleteHandler={() => onDeleteHandler(book._id)} />
             ))
         }
     }
-    const handleCreateBook = () => {
-        setMode('create')
-    }
-    const handleEditBook = () => {
-        setMode('edit')
-    }
-
     const showProgressBar = () => {
         if (isLoading) return (<AppBackdrop loading={isLoading} />)
         else return null
@@ -64,6 +58,27 @@ const Admin: React.FunctionComponent = () => {
         setBookToEdit(null);
     }
 
+    const onDeleteHandler = (bookId: string) => {
+        dispatch(deleteRequest(bookId, acessToken));
+    }
+
+    const handleOnSave = (book: IEditableBook) => {
+        const bookToSend: IBook = {
+            _id: book._id,
+            bookName: book.bookName, author: { authorName: book.authorName }, publisher: { publisherName: book.publisherName, year: book.year }
+            , price: book.price, imageURL: book.imageURL, rating: book.rating
+        }
+        if (mode === 'create') {
+            dispatch(createRequest(bookToSend, acessToken))
+        } else if (mode === 'edit') {
+            if (bookToEdit !== null) {
+                console.log(book)
+                console.log(bookToSend)
+                dispatch(editRequest(bookToEdit._id, bookToSend, acessToken))
+            }
+        }
+    }
+
     return (
         <div style={{ width: '100%', height: '80%' }}>
             <TextField
@@ -74,7 +89,7 @@ const Admin: React.FunctionComponent = () => {
             <AppIconButton clickHandler={() => handleOnCreate()} text={"Add Book"} icon={<AddIcon />} variant={undefined} />
 
             <AlertDialog mode={'create'} book={bookToEdit}
-                onCreate={() => handleCreateBook()} onEdit={() => { }}
+                onSaveCreate={(book: IEditableBook) => handleOnSave(book)} onSaveEdit={(book: IEditableBook) => handleOnSave(book)}
                 handleClose={() => handleDialogClose()} open={dialogState}
             />
             {showList()}

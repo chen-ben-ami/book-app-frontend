@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
-import { watchFetchBooks, watchLogin, watchRegister, watchSearchBook } from './app';
+import { watchCreateBook, watchDeleteBook, watchEditBook, watchFetchBooks, watchLogin, watchRegister, watchSearchBook } from './app';
 import { watchOrderBook } from './user';
 
 export default function* rootSaga() {
@@ -9,5 +9,8 @@ export default function* rootSaga() {
         watchFetchBooks(),
         watchSearchBook(),
         watchOrderBook(),
+        watchCreateBook(),
+        watchEditBook(),
+        watchDeleteBook(),
     ]);
 }
