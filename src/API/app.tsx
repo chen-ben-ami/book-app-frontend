@@ -6,7 +6,7 @@ const LOGIN = '/login';
 const REGISTER = '/register';
 const ADMIN_BOOK = '/admin/book';
 const ORDER_BOOK = '/user/order-book';
-const GET_BOOK = '/user/get-book';
+const GET_BOOK = '/user/get-order';
 const SEARCH_BOOKS = '/search-books';
 
 export const login = (username: string, password: string) => {
@@ -35,7 +35,7 @@ export const createBook = (book: IBook, acessToken: string) => {
 }
 
 export const deleteBook = (bookId: string, acessToken: string) => {
-    return axios.delete(ADMIN_BOOK+`?bookId=${bookId}`, {
+    return axios.delete(ADMIN_BOOK + `?bookId=${bookId}`, {
         headers: { 'Authorization': `Bearer ${acessToken}` }
     });
 }
@@ -52,8 +52,8 @@ export const orderBook = (bookId: string, acessToken: string) => {
     });
 }
 
-export const getOrderedBook = (bookId: string, acessToken: string) => {
-    return axios.put(GET_BOOK + `?bookId=${bookId}`, null, {
+export const getOrderedBook = (acessToken: string) => {
+    return axios.get(GET_BOOK, {
         headers: { 'Authorization': `Bearer ${acessToken}` }
     });
 }

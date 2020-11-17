@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 import { watchCreateBook, watchDeleteBook, watchEditBook, watchFetchBooks, watchLogin, watchRegister, watchSearchBook } from './app';
-import { watchOrderBook } from './user';
+import { watchOrderBook, watchOrderedBook } from './user';
 
 export default function* rootSaga() {
     yield all([
@@ -12,5 +12,6 @@ export default function* rootSaga() {
         watchCreateBook(),
         watchEditBook(),
         watchDeleteBook(),
+        watchOrderedBook(),
     ]);
 }

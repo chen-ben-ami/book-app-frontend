@@ -7,6 +7,7 @@ import AppIconButton from "../Components/AppIconButton";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from 'redux';
 import { logoutRequest } from "../State/Action/App";
+import { removeOrderRequest } from "../State/Action/User";
 const StyledDiv: any = styled.div`
     display: flex;
     justify-content: center;
@@ -43,6 +44,7 @@ const NavBar: React.FunctionComponent = () => {
     const acessToken: string = useSelector((state: any) => state.app.acessToken)
     const handleLogoutClicked = () => {
         dispatch(logoutRequest());
+        dispatch(removeOrderRequest())
         history.push(Routes.LOGIN);
     }
     return (

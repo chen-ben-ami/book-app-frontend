@@ -5,7 +5,7 @@ import { getBooksRequest, searchRequest } from "../State/Action/App";
 import { IBook } from "../API/interfaces";
 import AppCard from "../Components/Card";
 import TextField from '@material-ui/core/TextField';
-import { orderBookRequest } from "../State/Action/User";
+import { getOrderedBookRequest, orderBookRequest } from "../State/Action/User";
 import AppBackdrop from "../Components/Backdrop";
 import styled from 'styled-components';
 
@@ -24,8 +24,15 @@ const User: React.FunctionComponent = () => {
     useEffect(() => {
         if (acessToken !== null) {
             dispatch(getBooksRequest());
+            if (orderedBook === null) {
+                dispatch(getOrderedBookRequest(acessToken))
+            }
         }
     }, [acessToken]);
+
+    useEffect(() => {
+
+    }, [orderedBook]);
 
     const orderBook = (bookId: string) => {
         dispatch(orderBookRequest(bookId, acessToken));
